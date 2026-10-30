@@ -1,0 +1,113 @@
+:root {
+  --bg: #dfe5ea;
+  --body: #f6f8fa;
+  --screen: #1c2a33;
+  --screen-text: #eaf2f6;
+  --screen-dim: #8da3b0;
+  --key: #ffffff;
+  --key-text: #1c2a33;
+  --key-shadow: #c5cfd6;
+  --op: #0f766e;
+  --op-text: #ffffff;
+  --clear: #e7ecf0;
+  --focus: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11181d;
+    --body: #1b252c;
+    --screen: #0c1216;
+    --key: #26333b;
+    --key-text: #eaf2f6;
+    --key-shadow: #0f161b;
+    --op: #14b8a6;
+    --op-text: #062d2a;
+    --clear: #2f3f49;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+.calculator {
+  width: min(92vw, 340px);
+  padding: 16px;
+  background: var(--body);
+  border-radius: 20px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.display {
+  background: var(--screen);
+  color: var(--screen-text);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  text-align: right;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.expression {
+  min-height: 1.3em;
+  color: var(--screen-dim);
+  font-size: 0.95rem;
+}
+
+.result {
+  font-size: 2.4rem;
+  font-variant-numeric: tabular-nums;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.result.error { font-size: 1.3rem; color: #fca5a5; }
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  height: 58px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--key);
+  color: var(--key-text);
+  font: inherit;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--key-shadow);
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.key:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--key-shadow);
+}
+
+.key:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.key-op,
+.key-equals { background: var(--op); color: var(--op-text); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25); }
+.key-op.active { outline: 3px solid var(--focus); outline-offset: 2px; }
+.key-clear { background: var(--clear); }
+.span-2 { grid-column: span 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: none; }
+}
